@@ -24,6 +24,7 @@
   "homepage": "https://github.com/benrki/nysc-class-reserver#readme",
   "dependencies": {
     "async": "^2.1.4",
+    "cheerio": "^0.22.0",
     "coffee-script": "^1.12.2",
     "request": "^2.79.0",
     "underscore": "^1.8.3"
