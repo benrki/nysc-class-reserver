@@ -15,7 +15,9 @@ program
 
 return console.error "Error: no #{e}" for e in required when not program[e]
 
-program[k] v for k, v of command: k, description: v, action: main[k] for k, v of actions
+for k, v of actions
+  action = program
+  action = action[k] v for k, v of command: k, description: v, action: main[k]
 
 program.parse process.argv
 

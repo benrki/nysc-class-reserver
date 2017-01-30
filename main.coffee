@@ -17,7 +17,9 @@ urls =
   login:      "/login_check"
   classes:    "/classes/"
 
-list = (cmd, { username, password }) ->
+list = ({ parent }) ->
+  { username, password } = parent
+  console.info "list", username, password
   async.auto
     csrf_token: (n) ->
       request { uri: urls.loginToken }, (err, response, body) ->
@@ -38,7 +40,7 @@ list = (cmd, { username, password }) ->
         "class_filter[club][]": club
         "class_filter[day]": day
       async.waterfall [
-        async.apply request, uri: urls.classes, qs: params
+        async.apply request, { uri: urls.classes, qs: params }
         (response, body, n) ->
           console.log cheerio.load(body)
           fs.writeFile "index.html", body, n
@@ -47,7 +49,8 @@ list = (cmd, { username, password }) ->
   , (err) ->
     console.log 'fin', err
 
-schedule = ->
-  console.log "TODO"
+schedule = ({ parent }) ->
+  { username, password } = parent
+  console.info "schedule", username, password
 
 module.exports = { list, schedule }
